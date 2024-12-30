@@ -671,16 +671,20 @@ $('.owl-partners').owlCarousel({
   nav: false, // Disable navigation arrows
   dots: false, // Disable dots
   autoplay: true, // Enable auto-scroll
-  autoplayTimeout: 530, // Set interval (time before moving to the next slide)
-  autoplaySpeed: 500, // Adjust for smoothness (higher is slower)
+  autoplayTimeout: 1000, // Default interval (time before moving to the next slide)
+  autoplaySpeed: 1000, // Default smoothness (higher is slower)
   slideTransition: 'linear', // Ensure smooth transitions
   autoplayHoverPause: true, // Pause scrolling on hover
   responsive: {
     0: {
       items: 1, // Show 1 item on small screens
+      autoplayTimeout: 3000, // Set interval to 3 seconds for mobile screens
+      autoplaySpeed: 500, // Reduce speed on mobile (faster transition)
     },
     576: {
       items: 3, // Show 3 items on medium screens
+      autoplayTimeout: 3000, // Set interval to 3 seconds for mobile screens
+      autoplaySpeed: 500, // Reduce speed on mobile (faster transition)
     },
     992: {
       items: 5, // Show 5 items on large screens

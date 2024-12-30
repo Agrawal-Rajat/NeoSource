@@ -1229,30 +1229,31 @@ button {
 }
 
 /* Responsive styling for smaller screens */
-@media (max-width: 768px) {
+@media (max-width: 468px) {
   .partner-item {
-    height: 100px;
+    height: 120px; /* Increase height for better spacing */
     padding: 8px;
   }
 
   .partner-item .industry-icon {
-    font-size: 28px;
-    width: 45px;
-    height: 45px;
+    font-size: 36px; /* Increase icon size for mobile */
+    width: 50px;     /* Adjust width to match font size */
+    height: 50px;    /* Adjust height for better proportion */
   }
 
   .partner-item .industry-name h3 {
-    font-size: 0.9rem;
+    font-size: 1rem; /* Adjust font size to make text readable */
   }
 
   .section-heading {
-    font-size: 2rem;
+    font-size: 2.2rem; /* Slightly larger section heading */
   }
 
   .section-subheading {
-    font-size: 1rem;
+    font-size: 1.1rem; /* Slightly larger subheading */
   }
 }
+
 
 
 
