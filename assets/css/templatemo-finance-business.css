@@ -975,7 +975,7 @@ strong {
 }
 
 .callback-form .contact-form {
-  background-color: #3cb371;
+  background-color: #f7f7f7;
   padding: 60px;
   border-radius: 5px;
   text-align: center;
@@ -1087,7 +1087,7 @@ button {
 .upload-label {
   display: block;
   padding: 10px 20px;
-  background-color: rgb(31, 31, 223); /* Blue background */
+  background-color: rgb(59, 170, 239); /* Blue background */
   color: white;
   cursor: pointer;
   text-align: center;
@@ -1109,9 +1109,9 @@ button {
 /* Submit Button Styles */
 #employer-form-submit,
 #employee-form-submit {
-  background-color: rgb(31, 31, 223); /* Initial color */
+  background-color: rgb(59, 170, 239); /* Initial color */
   color: white; /* Text color */
-  border: 2px solid rgb(31, 31, 223); /* Border color */
+  border: 2px solid rgb(59, 170, 239); /* Border color */
   padding: 10px 20px;
   transition: background-color 0.3s, color 0.3s;
 }
