@@ -537,19 +537,19 @@ header .navbar {
 }
 
 /* Services */
-
 .services {
   margin-top: 140px;
 }
 
 .service-item {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: space-between;
   width: 350px;
   margin: 20px;
   height: 500px; /* Fixed height for uniform size */
   box-sizing: border-box; /* Include padding in the element's dimensions */
+  transition: all 0.3s ease; /* Smooth transition for resizing */
 }
 
 .service-item img {
@@ -580,19 +580,52 @@ header .navbar {
 
 .services .row {
   display: flex; /* Use flexbox for the row */
-  flex-wrap:wrap; /* Allow wrapping for responsive layout */
+  flex-wrap: wrap; /* Allow wrapping for responsive layout */
   justify-content: center; /* Center all service items */
+  align-items: center; /* Center vertically */
+  width: 100%; /* Ensure the row takes full width */
 }
 
 @media (max-width: 768px) {
   .services .row {
     flex-direction: column; /* Stack cards vertically on smaller screens */
+    align-items: center; /* Ensure items are centered on smaller screens */
   }
 
   .service-item {
+    width: 90%; /* Allow service items to take up more space on smaller screens */
+    margin: 10px 0; /* Reduce margin for better spacing */
+    height: auto; /* Allow dynamic height for better responsiveness */
+  }
+
+  .service-item .down-content {
+    padding: 20px; /* Slightly smaller padding for smaller screens */
+  }
+
+  .service-item .down-content h4 {
+    font-size: 18px; /* Smaller font size for smaller screens */
+  }
+
+  .service-item .down-content p {
+    font-size: 14px; /* Adjust paragraph font size for better readability */
+  }
+}
+
+@media (max-width: 480px) {
+  .services .row {
+    flex-direction: column; /* Stack cards vertically on smaller screens */
+    justify-content: center; /* Ensure items are centered horizontally */
+    align-items: center; /* Ensure items are centered vertically */
+  }
+
+  .service-item {
+    width: 100%; /* Allow service items to take up more space on smaller screens */
+    margin-left: 13px;
     height: auto; /* Allow dynamic height for better responsiveness */
   }
 }
+
+
 
 
 
