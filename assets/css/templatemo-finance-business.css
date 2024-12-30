@@ -319,8 +319,8 @@ header .navbar {
   background-image: none;
 }
 .navbar .navbar-toggler {
-  border-color: #fff;
-  background-color: #fff;
+  border-color: transparent;
+  background-color: transparent;
   height: 36px;
   outline: none;
   border-radius: 0px;
@@ -1668,7 +1668,7 @@ s̄ .contact-information {
     left: 0;
     width: 100%;
     text-align: center;
-    background-color: #fff;
+    background-color: black;
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
   }
   .navbar .navbar-nav .nav-item {
@@ -1679,7 +1679,7 @@ s̄ .contact-information {
   }
   .navbar .navbar-nav a.nav-link {
     padding: 15px 0px;
-    color: #1e1e1e !important;
+    color: white !important;
   }
   .navbar .navbar-nav .nav-link:hover,
   .navbar .navbar-nav .active > .nav-link,
