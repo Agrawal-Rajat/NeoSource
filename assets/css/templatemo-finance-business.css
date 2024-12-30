@@ -701,11 +701,21 @@ strong {
   font-size: 1.4em;
 }
 
+
 .timeline .event {
+  padding: 10px 0;
+  text-align: center;
+  position: relative;
+  margin-left: 0;
+  margin-bottom: 20px;
+  min-height: 120px; /* Ensure all events have a minimum height for consistency */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center the content */
+  position: relative;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
   padding-bottom: calc(var(--spacing) * 0.5);
   margin-bottom: var(--spacing);
-  position: relative;
 }
 
 .timeline .event:last-of-type {
@@ -742,6 +752,8 @@ strong {
   top: calc(var(--spacing) / 2);
 }
 
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .timeline {
@@ -774,19 +786,45 @@ strong {
     padding: 10px;
     border-left: none; /* Remove vertical line on very small screens */
     border-top: var(--line) solid var(--color-primary); /* Use horizontal timeline instead */
-  }
-
-  .timeline .event::after {
-    top: 103px;
-    left: calc(50% - var(--dot) / 2); /* Center the dot horizontally */
-    margin: 10px 0;
+    position: relative;
   }
 
   .timeline .event {
     padding: 10px 0;
     text-align: center;
+    position: relative;
+    margin-left: 0;
+    margin-bottom: 20px;
+    min-height: 120px; /* Ensure all events have a minimum height for consistency */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the content */
+  }
+
+  .timeline .event::after {
+    top: 142px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%); /* Ensure dot is centered both horizontally and vertically */
+    margin-top: 0; /* Remove any extra margin */
+  }
+
+  /* Adjusting the content inside the event */
+  .timeline .event h3,
+  .timeline .event p {
+    margin: 5px 0; /* Small margin between content to prevent overlap */
+  }
+
+  /* Fix the dot position */
+  .timeline .event::after {
+    left: 50%; /* Keep the dot centered horizontally */
+    transform: translateX(-50%); /* Adjust horizontal centering */
+    margin-top: -10px; /* Adjust the margin-top to position the dot more accurately */
   }
 }
+
+
+
+
 
 
 
