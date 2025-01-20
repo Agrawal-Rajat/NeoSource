@@ -1,4 +1,10 @@
 import { google } from 'googleapis';
+import express from 'express';
+
+const app = express();
+
+// Use express.json() to automatically parse JSON data in the body
+app.use(express.json());
 
 // Retrieve credentials from environment variables
 const googleClientEmail = process.env.CLIENT_EMAIL;
@@ -50,23 +56,35 @@ async function appendToSheet(auth, data) {
     console.log('Data added to Google Sheets:', response.data);
   } catch (err) {
     console.error('Error appending data:', err);
+    throw new Error('Error appending data to sheet');
   }
 }
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    const formData = req.body;
+app.post('/api/submit', async (req, res) => {
+  const formData = req.body;
 
-    try {
-      const auth = await authenticate();  // Authenticate using environment variables
-      await appendToSheet(auth, formData);
-
-      res.status(200).send('Form data submitted successfully');
-    } catch (error) {
-      console.error('Error:', error);
-      res.status(500).send('Error submitting form data');
-    }
-  } else {
-    res.status(405).send('Method Not Allowed');
+  if (!formData || !formData.company || !formData['years-of-exp'] || !formData.post) {
+    return res.status(400).json({ error: 'Missing required fields' });
   }
-}
+
+  try {
+    const auth = await authenticate();  // Authenticate using environment variables
+    await appendToSheet(auth, formData);
+
+    res.status(200).json({ message: 'Form data submitted successfully' });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Error submitting form data' });
+  }
+});
+
+// Example to handle incorrect methods
+app.all('*', (req, res) => {
+  res.status(405).json({ error: 'Method Not Allowed' });
+});
+
+// Set up your server to listen on a port
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
