@@ -1,24 +1,30 @@
-const { google } = require('googleapis');
-const { OAuth2Client } = require('google-auth-library');
+import { google } from 'googleapis';
 
-// This will read the credentials from your JSON service account key file
-const credentials = require('./credentials.json');  // Adjust path accordingly
+// Retrieve credentials from environment variables
+const googleClientEmail = process.env.CLIENT_EMAIL;
+const googlePrivateKey = process.env.PRIVATE_KEY.replace(/\\n/g, '\n'); // Handle multiline private key
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const SPREADSHEET_ID = '1i8DZIIfjOJsF-8Uxuvo9n8jc6KpqbsIGsXTzPbqMpLY'; // Replace with your Google Sheets ID
 const RANGE = 'Sheet1!A2:H'; // The range in your sheet where you want the data to go (e.g., Sheet1!A1)
 
 async function authenticate() {
-  const auth = new google.auth.GoogleAuth({
-    credentials,
-    scopes: SCOPES,
-  });
+  // Create the JWT client with the environment variables
+  const jwtClient = new google.auth.JWT(
+    googleClientEmail,
+    null,
+    googlePrivateKey,
+    SCOPES
+  );
 
-  return auth.getClient();
+  // Ensure authentication
+  await jwtClient.authorize();
+  return jwtClient;
 }
 
 async function appendToSheet(auth, data) {
   const sheets = google.sheets({ version: 'v4', auth });
+
   const request = {
     spreadsheetId: SPREADSHEET_ID,
     range: RANGE,
@@ -52,7 +58,7 @@ export default async function handler(req, res) {
     const formData = req.body;
 
     try {
-      const auth = await authenticate();
+      const auth = await authenticate();  // Authenticate using environment variables
       await appendToSheet(auth, formData);
 
       res.status(200).send('Form data submitted successfully');
