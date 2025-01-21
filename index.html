@@ -605,6 +605,7 @@ https://templatemo.com/tm-545-finance-business
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Additional Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/js/jquery.singlePageNav.min.js"></script>
   <script src="assets/js/custom.js"></script>
   <script src="assets/js/owl.js"></script>
@@ -733,7 +734,13 @@ form.addEventListener("submit", async (event) => {
     // Parse JSON response
     const result = await response.json();
     console.log("Form submitted successfully", result);
-    alert("Thank you for reaching out! Our team will get back to you shortly. For any queries, feel free to contact us at: Gaurav@neosource.in.");
+    Swal.fire({
+  icon: 'success',
+  title: 'Thank You!',
+  text: 'Our team will get back to you shortly. For any queries, feel free to contact us at: Gaurav@neosource.in.',
+  footer: '<a href="mailto:Gaurav@neosource.in">Send us an email</a>',
+});
+
     form.reset();
   } catch (error) {
     console.error("Error submitting form:", error.message);
