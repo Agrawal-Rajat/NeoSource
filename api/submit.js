@@ -12,7 +12,7 @@ const googlePrivateKey = process.env.PRIVATE_KEY.replace(/\\n/g, '\n'); // Handl
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const SPREADSHEET_ID = '1i8DZIIfjOJsF-8Uxuvo9n8jc6KpqbsIGsXTzPbqMpLY'; // Replace with your Google Sheets ID
-const RANGE = 'Sheet1!A2:H'; // The range in your sheet where you want the data to go (e.g., Sheet1!A1)
+const RANGE = 'Sheet1!A2:J'; // The range in your sheet where you want the data to go (e.g., Sheet1!A1)
 
 async function authenticate() {
   // Create the JWT client with the environment variables
@@ -38,6 +38,8 @@ async function appendToSheet(auth, data) {
     resource: {
       values: [
         [
+          data.name,
+          data.phone,
           data.company,
           data['years-of-exp'],
           data.post,
