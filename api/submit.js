@@ -12,7 +12,7 @@ const googlePrivateKey = process.env.PRIVATE_KEY.replace(/\\n/g, '\n'); // Handl
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
 const SPREADSHEET_ID = '1i8DZIIfjOJsF-8Uxuvo9n8jc6KpqbsIGsXTzPbqMpLY'; // Replace with your Google Sheets ID
-const RANGE = 'Sheet1!A2:J'; // The range in your sheet where you want the data to go (e.g., Sheet1!A1)
+const RANGE = 'Sheet1!A2:H'; // Updated range for the new structure (8 columns)
 
 async function authenticate() {
   // Create the JWT client with the environment variables
@@ -41,13 +41,12 @@ async function appendToSheet(auth, data) {
           data.name,
           data.phone,
           data.company,
+          data.email,
+          data.position,
           data['years-of-exp'],
-          data.post,
-          data['job-description'],
           data['required-skills'],
-          data['preferred-skills'],
-          data.salary,
-          data['joining-date'],
+          data['job-description'],
+          data.salary
         ]
       ],
     },
@@ -65,12 +64,24 @@ async function appendToSheet(auth, data) {
 app.post('/api/submit', async (req, res) => {
   const formData = req.body;
 
-  if (!formData || !formData.company || !formData['years-of-exp'] || !formData.post) {
+  // Validate required fields
+  if (
+    !formData ||
+    !formData.name ||
+    !formData.phone ||
+    !formData.company ||
+    !formData.email ||
+    !formData.position ||
+    !formData['years-of-exp'] ||
+    !formData['required-skills'] ||
+    !formData['job-description'] ||
+    !formData.salary
+  ) {
     return res.status(400).json({ error: 'Missing required fields' });
   }
 
   try {
-    const auth = await authenticate();  // Authenticate using environment variables
+    const auth = await authenticate(); // Authenticate using environment variables
     await appendToSheet(auth, formData);
 
     res.status(200).json({ message: 'Form data submitted successfully' });
